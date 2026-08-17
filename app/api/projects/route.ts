@@ -42,18 +42,18 @@ export async function POST(request: Request) {
       });
     }
 
-    const project = await prisma.project.create({
-      data: {
-        id: crypto.randomUUID(),
-        userId: user.id,
-        title: title.trim(),
-        prompt: prompt.trim(),
-        style: style || "Cinematic",
-        duration: Number(duration) || 5,
-        status: "PENDING",
-      },
-    });
-
+const project = await prisma.project.create({
+  data: {
+    id: crypto.randomUUID(),
+    userId: user.id,
+    title: title.trim(),
+    prompt: prompt.trim(),
+    style: style || "Cinematic",
+    duration: Number(duration) || 5,
+    status: "PENDING",
+    updatedAt: new Date(),
+  },
+});
     return NextResponse.json({
       success: true,
       project,
